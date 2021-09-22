@@ -34,7 +34,7 @@ function ScrollTop(props) {
     const trigger = useScrollTrigger({
         target: window ? window() : undefined,
         disableHysteresis: true,
-        threshold: 1000,
+        threshold: 500,
     });
 
     const handleClick = (event) => {
@@ -72,6 +72,7 @@ export default function HomePageContent(props) {
                 Language={props.data.content.Language}
                 Name={props.data.content.Name}
                 Notification={props.data.content.Notification}
+                Github={props.data.content.Github}
                 switchLanguage={props.switchLanguage} />
             <Toolbar id="back-to-top-anchor" />
             <Container>

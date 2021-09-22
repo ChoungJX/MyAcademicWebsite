@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import Divider from '@material-ui/core/Divider';
@@ -8,10 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import TranslateIcon from '@material-ui/icons/Translate';
 import { default as React } from 'react';
-
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -147,6 +149,25 @@ export default function Header(props) {
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
+                        <Button
+                            aria-label="language menu"
+                            aria-controls={languageMenuId}
+                            aria-haspopup="true"
+                            onClick={handleLanguageMenuOpen}
+                            color="inherit"
+                            startIcon={<TranslateIcon style={{ fontSize: 25 }} />}
+                            endIcon={<KeyboardArrowDownIcon />}>
+                            {(() => {
+                                switch (props.Language) {
+                                    case "english":
+                                        return "English"
+                                    case "chinese":
+                                        return "简体中文"
+                                    default:
+                                        return "Language"
+                                }
+                            })()}
+                        </Button>
                         <IconButton
                             aria-label="notification menu"
                             aria-controls={notificationEl}
@@ -160,17 +181,26 @@ export default function Header(props) {
                         </IconButton>
                         <IconButton
                             edge="end"
-                            aria-label="language menu"
-                            aria-controls={languageMenuId}
-                            aria-haspopup="true"
-                            onClick={handleLanguageMenuOpen}
                             color="inherit"
+                            onClick={() => { window.open(props.Github) }}
                         >
-                            <TranslateIcon />
+                            <Badge color="secondary">
+                                <GitHubIcon />
+                            </Badge>
                         </IconButton>
                     </div>
                     <div className={classes.sectionMobile}>
                         <IconButton
+                            aria-label="language menu"
+                            aria-controls={languageMenuId}
+                            aria-haspopup="true"
+                            onClick={handleLanguageMenuOpen}
+                            color="inherit">
+                            <Badge color="secondary">
+                                <TranslateIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
                             aria-label="notification menu"
                             aria-controls={notificationEl}
                             aria-haspopup="true"
@@ -183,13 +213,12 @@ export default function Header(props) {
                         </IconButton>
                         <IconButton
                             edge="end"
-                            aria-label="language menu"
-                            aria-controls={languageMenuId}
-                            aria-haspopup="true"
-                            onClick={handleLanguageMenuOpen}
                             color="inherit"
+                            onClick={() => { window.open(props.Github) }}
                         >
-                            <TranslateIcon />
+                            <Badge color="secondary">
+                                <GitHubIcon />
+                            </Badge>
                         </IconButton>
                     </div>
                 </Toolbar>

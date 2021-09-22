@@ -58,7 +58,7 @@ export default class HomePage extends React.Component {
                     {
                         "start_time": "Feb 2019",
                         "end_time": "Oct 2019",
-                        "title": "System design & algorithms implementation",
+                        "title": "System Design & Algorithms Implementation",
                         "location": "CQUPT E-evidence Collection and Preservation laboratory",
                         "city": "Chongqing China",
                         "content": "Implemented a Face Recognition Platform that was won the first prize of the 8th iSoftstone cup campus development competition.",
@@ -68,7 +68,7 @@ export default class HomePage extends React.Component {
                     {
                         "start_time": "Jul 2018",
                         "end_time": "Oct 2018",
-                        "title": "Algorithms design & implementation",
+                        "title": "Algorithms Design & Implementation",
                         "location": "CQUPT E-evidence Collection and Preservation laboratory",
                         "city": "Chongqing China",
                         "content": "Designed and implemented NLP algorithms for <Chongqing Daily> Public Sentiment System that was shown at Chongqing International Cultural Industries Fair in September 2018.",
@@ -102,7 +102,7 @@ export default class HomePage extends React.Component {
                         <br />
                         在东工大读硕士之前，我在<a href="https://www.cqupt.edu.cn">重庆邮电大学</a>软件工程学院获得了学士学位。
                         <br />
-                        比起研究算法本身，我更想弄清算法在底层到底是如何运行的，以及该如何优化它们使得它们能运行得更快。
+                        比起研究算法本身，我更想弄清算法在底层到底是如何运行的，以及该如何优化它们使得它们能运行得更快。为此，我转向学习计算机体系架构。
                     </div>
                 ),
                 Notification: [
@@ -125,7 +125,7 @@ export default class HomePage extends React.Component {
                     {
                         "start_time": "2019年6月",
                         "end_time": "2020年12月",
-                        "title": "实验助理",
+                        "title": "研究助理",
                         "location": "重庆邮电大学电子证据与数据保全实验室",
                         "city": "中国，重庆",
                         "content": "神经网络信息安全防护模型",

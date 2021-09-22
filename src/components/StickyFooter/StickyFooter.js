@@ -1,28 +1,28 @@
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import React from 'react';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary">
+    <Button
+      color="inherit"
+      onClick={() => { window.open("https://github.com/ChoungJX/MyAcademicWebsite") }}
+      endIcon={<GitHubIcon />}>
       {(() => {
         switch (props.Language) {
           case "english":
-            return "source code: "
+            return "source code"
           case "chinese":
-            return "源代码："
+            return "源代码"
           default:
-            return "source code: "
+            return "source code"
         }
       })()}
-      <Link color="inherit" href="https://github.com/ChoungJX/MyAcademicWebsite">
-        <GitHubIcon />
-      </Link>
-    </Typography>
+    </Button>
   );
 }
 
