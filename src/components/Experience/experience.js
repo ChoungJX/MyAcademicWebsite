@@ -54,16 +54,7 @@ export default function Experience(props) {
         <Card>
             <CardContent>
                 <Typography gutterBottom variant="h4" component="h2">
-                    {(() => {
-                        switch (props.Language) {
-                            case "english":
-                                return "Experience"
-                            case "chinese":
-                                return "项目经历"
-                            default:
-                                return "Experience"
-                        }
-                    })()}
+                    {props.Language.Experience.title}
                 </Typography>
                 <Divider />
                 <Timeline className={classes.sectionDesktop} align="left">

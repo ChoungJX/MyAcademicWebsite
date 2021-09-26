@@ -24,16 +24,7 @@ export default function AboutMe(props) {
         <Card className={classes.root}>
             <CardContent>
                 <Typography variant="h5" component="h4">
-                    {(() => {
-                        switch (props.Language) {
-                            case "english":
-                                return "About Me"
-                            case "chinese":
-                                return "个人简介"
-                            default:
-                                return "About Me"
-                        }
-                    })()}
+                    {props.Language.AboutMe.title}
                 </Typography>
                 <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
                 <Typography variant="body1" gutterBottom>

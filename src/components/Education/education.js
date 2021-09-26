@@ -18,16 +18,7 @@ export default function Education(props) {
         <Card>
             <CardContent>
                 <Typography variant="h5" component="h4">
-                    {(() => {
-                        switch (props.Language) {
-                            case "english":
-                                return "Education"
-                            case "chinese":
-                                return "教育背景"
-                            default:
-                                return "Education"
-                        }
-                    })()}
+                    {props.Language.Education.title}
                 </Typography>
                 <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
                 <List className={classes.list}>

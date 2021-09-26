@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import BuildIcon from '@material-ui/icons/Build';
 import CodeIcon from '@material-ui/icons/Code';
 import MemoryIcon from '@material-ui/icons/Memory';
@@ -10,10 +11,57 @@ export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
 
+        this.UILang = {
+            "english": {
+                AboutMe: {
+                    title: "About Me"
+                },
+                BasicInfo: {
+                    update_time: "Updated on:",
+                    message: "Feel free to contact me!"
+                },
+                Education: {
+                    title: "Education"
+                },
+                Experience: {
+                    title: "Experience"
+                },
+                Header: {
+                    Language: "English"
+                },
+                Footer: {
+                    content: (<Typography variant="body1">This page is built by <a href="https://v4.mui.com/">Material UI</a> based on <a href="https://reactjs.org/">React.js</a></Typography>),
+                    button: "source code"
+                }
+            },
+            "chinese": {
+                AboutMe: {
+                    title: "个人简介"
+                },
+                BasicInfo: {
+                    update_time: "页面更新于：",
+                    message: "请通过邮件与我联系！"
+                },
+                Education: {
+                    title: "教育背景"
+                },
+                Experience: {
+                    title: "项目经历"
+                },
+                Header: {
+                    Language: "简体中文"
+                },
+                Footer: {
+                    content: (<Typography variant="body1">本网页基于<a href="https://v4.mui.com/">Material UI</a>以及<a href="https://reactjs.org/">React.js</a>开发</Typography>),
+                    button: "源代码"
+                }
+            }
+        }
+
         this.data = {
             "english": {
                 Language: "english",
-                UpdatedTime: "September 22, 2021",
+                UpdatedTime: "September 26, 2021",
                 Name: "Linfeng Zheng",
                 Avatar: "/static/images/avatar.jpg",
                 Email: "zhenglinfeng43@gmail.com",
@@ -29,7 +77,7 @@ export default class HomePage extends React.Component {
                     </div>
                 ),
                 Notification: [
-                    { "date": "2021-09-22", "news": (<div>I joined the <a href="https://titech-caras.github.io/index-en.html">CARAS Lab @ Tokyo Tech</a>!</div>) },
+                    { "date": "2021-09-22", "news": (<div>I joined the <a href="https://titech-caras.github.io/index-en.html">CARAS Lab@Tokyo Tech</a>!</div>) },
                     { "date": "2021-09-22", "news": "My home page is open!" },
                 ],
                 Education: [
@@ -89,14 +137,14 @@ export default class HomePage extends React.Component {
             },
             "chinese": {
                 Language: "chinese",
-                UpdatedTime: "2021年9月22日",
-                Name: "郑林峰",
+                UpdatedTime: "2021年9月26日",
+                Name: "郑林峰的主页",
                 Avatar: "/static/images/avatar.jpg",
                 Email: "zhenglinfeng43@gmail.com",
                 Github: "https://github.com/ChoungJX",
                 AboutMe: (
                     <div>
-                        我正在<a href="https://www.titech.ac.jp/">东京工业大学</a>情报通信系攻读硕士学位。
+                        我正在<a href="https://www.titech.ac.jp/">东京工业大学</a>情報通信系攻读硕士学位。
                         <br />
                         我对计算机体系结构，操作系统以及web开发抱有浓厚的兴趣。
                         <br />
@@ -106,12 +154,12 @@ export default class HomePage extends React.Component {
                     </div>
                 ),
                 Notification: [
-                    { "date": "2021-09-22", "news": (<div>我加入了 <a href="https://titech-caras.github.io/index-en.html">东工大 CARAS实验室</a>!</div>) },
+                    { "date": "2021-09-22", "news": (<div>我加入了 <a href="https://titech-caras.github.io/index-en.html">CARAS实验室@东工大</a>!</div>) },
                     { "date": "2021-09-22", "news": "个人主页已经开放！" },
                 ],
                 Education: [
                     {
-                        "degree": "工学硕士学位，情报通信专业，预计2023年毕业",
+                        "degree": "工学硕士学位，信息与通信工程专业，预计2023年毕业",
                         "school": "东京工业大学",
                         "icon": (<MemoryIcon />)
                     },
@@ -167,21 +215,23 @@ export default class HomePage extends React.Component {
         }
 
         this.state = {
-            content: this.data["english"]
+            content: this.data["english"],
+            ui_lang: this.UILang["english"]
         }
     }
 
     handleLanguageButtonClick(language) {
         this.setState({
-            content: this.data[language]
+            content: this.data[language],
+            ui_lang: this.UILang[language]
         });
     }
 
     render() {
-        const content = this.state;
+        const { content, ui_lang } = this.state;
 
         return (
-            <HomePageContent data={content} switchLanguage={(language) => this.handleLanguageButtonClick(language)} />
+            <HomePageContent data={content} Language={ui_lang} switchLanguage={(language) => this.handleLanguageButtonClick(language)} />
         )
     }
 }

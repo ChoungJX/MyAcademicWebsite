@@ -23,16 +23,7 @@ export default function BasicInfo(props) {
 
     return (
         <Card>
-            {(() => {
-                switch (props.Language) {
-                    case "english":
-                        return <CardHeader title={props.Name} subheader={`Updated on: ` + props.UpdatedTime} />
-                    case "chinese":
-                        return <CardHeader title={props.Name} subheader={`最后更新于: ` + props.UpdatedTime} />
-                    default:
-                        return <CardHeader title={props.Name} subheader={`Updated on: ` + props.UpdatedTime} />
-                }
-            })()}
+            <CardHeader title={props.Name} subheader={`${props.Language.BasicInfo.update_time} ${props.UpdatedTime}`} />
             <CardMedia
                 className={classes.media}
                 image={props.Avatar}
@@ -40,16 +31,7 @@ export default function BasicInfo(props) {
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {(() => {
-                        switch (props.Language) {
-                            case "english":
-                                return "Feel free to contact me!"
-                            case "chinese":
-                                return "点击邮件按钮联系我"
-                            default:
-                                return "Feel free to contact me!"
-                        }
-                    })()}
+                    {props.Language.BasicInfo.message}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

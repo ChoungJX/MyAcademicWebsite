@@ -2,7 +2,6 @@ import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import React from 'react';
 
@@ -12,16 +11,7 @@ function Copyright(props) {
       color="inherit"
       onClick={() => { window.open("https://github.com/ChoungJX/MyAcademicWebsite") }}
       endIcon={<GitHubIcon />}>
-      {(() => {
-        switch (props.Language) {
-          case "english":
-            return "source code"
-          case "chinese":
-            return "源代码"
-          default:
-            return "source code"
-        }
-      })()}
+      {props.Language.Footer.button}
     </Button>
   );
 }
@@ -49,23 +39,7 @@ export default function StickyFooter(props) {
         }}
       >
         <Container maxWidth="sm">
-          {(() => {
-            switch (props.Language) {
-              case "english":
-                return <Typography variant="body1">
-                  This website is built by <a href="https://v4.mui.com/">Material UI</a> based on <a href="https://reactjs.org/">React.js</a>
-                </Typography>
-              case "chinese":
-                return <Typography variant="body1">
-                  本网站基于 <a href="https://v4.mui.com/">Material UI</a>和<a href="https://reactjs.org/">React.js</a>开发
-                </Typography>
-              default:
-                return <Typography variant="body1">
-                  This website is built by <a href="https://v4.mui.com/">Material UI</a> based on <a href="https://reactjs.org/">React.js</a>
-                </Typography>
-            }
-          })()}
-
+          {props.Language.Footer.content}
           <Copyright Language={props.Language} />
         </Container>
       </Box>

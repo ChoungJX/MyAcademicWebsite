@@ -69,10 +69,10 @@ export default function HomePageContent(props) {
         <React.Fragment>
             <CssBaseline />
             <Header
-                Language={props.data.content.Language}
-                Name={props.data.content.Name}
-                Notification={props.data.content.Notification}
-                Github={props.data.content.Github}
+                Language={props.Language}
+                Name={props.data.Name}
+                Notification={props.data.Notification}
+                Github={props.data.Github}
                 switchLanguage={props.switchLanguage} />
             <Toolbar id="back-to-top-anchor" />
             <Container>
@@ -86,12 +86,12 @@ export default function HomePageContent(props) {
                         lg={4}
                         xl={4}>
                         <BasicInfo
-                            Language={props.data.content.Language}
-                            Name={props.data.content.Name}
-                            Email={props.data.content.Email}
-                            Github={props.data.content.Github}
-                            Avatar={props.data.content.Avatar}
-                            UpdatedTime={props.data.content.UpdatedTime} />
+                            Language={props.Language}
+                            Name={props.data.Name}
+                            Email={props.data.Email}
+                            Github={props.data.Github}
+                            Avatar={props.data.Avatar}
+                            UpdatedTime={props.data.UpdatedTime} />
                     </Grid>
                     <Grid item
                         xs={12}
@@ -99,15 +99,15 @@ export default function HomePageContent(props) {
                         md={8}
                         lg={8}
                         xl={8}>
-                        <AboutMe Language={props.data.content.Language} AboutMe={props.data.content.AboutMe} />
+                        <AboutMe Language={props.Language} AboutMe={props.data.AboutMe} />
                         <br />
-                        <Education Language={props.data.content.Language} data={props.data.content.Education} />
+                        <Education Language={props.Language} data={props.data.Education} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Experience Language={props.data.content.Language} data={props.data.content.Experience} />
+                        <Experience Language={props.Language} data={props.data.Experience} />
                     </Grid>
                 </Grid>
-                <StickyFooter Language={props.data.content.Language} />
+                <StickyFooter Language={props.Language} />
             </Container>
             <ScrollTop {...props}>
                 <Fab color="secondary" size="small" aria-label="scroll back to top">

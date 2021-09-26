@@ -136,16 +136,7 @@ export default function Header(props) {
             <AppBar position="fixed">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        {(() => {
-                            switch (props.Language) {
-                                case "english":
-                                    return props.Name
-                                case "chinese":
-                                    return `${props.Name}的主页`
-                                default:
-                                    return props.Name
-                            }
-                        })()}
+                        {props.Name}
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
@@ -157,16 +148,7 @@ export default function Header(props) {
                             color="inherit"
                             startIcon={<TranslateIcon style={{ fontSize: 25 }} />}
                             endIcon={<KeyboardArrowDownIcon />}>
-                            {(() => {
-                                switch (props.Language) {
-                                    case "english":
-                                        return "English"
-                                    case "chinese":
-                                        return "简体中文"
-                                    default:
-                                        return "Language"
-                                }
-                            })()}
+                            {props.Language.Header.Language}
                         </Button>
                         <IconButton
                             aria-label="notification menu"
