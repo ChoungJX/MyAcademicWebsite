@@ -1,0 +1,23 @@
+@media (max-width: 767px) {
+    .header-button-all {
+        display: none;
+    }
+}
+
+@media (min-width: 767px) {
+    .header-button-small {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-text-full {
+        display: none;
+    }
+}
+
+@media (min-width: 767px) {
+    .header-text-short {
+        display: none;
+    }
+}
