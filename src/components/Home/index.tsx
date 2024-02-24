@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import AboutMe from '../../components/AboutMe/about_me';
-import BasicInfo from '../../components/BasicInformation/basic_info';
-import Education from '../../components/Education/education';
-import Experience from '../../components/Experience/experience';
-import Header from '../../components/Header/header';
-import StickyFooter from '../../components/StickyFooter/StickyFooter';
+import AboutMe from './components/AboutMe/about_me';
+import BasicInfo from './components/BasicInformation/basic_info';
+import Education from './components/Education/education';
+import Experience from './components/Experience/experience';
+import Header from '../Header/header';
+import StickyFooter from '../StickyFooter/StickyFooter';
 import { Fab, Grid, Toolbar, Zoom, useScrollTrigger } from '@mui/material';
 import { Container, CssBaseline } from '@mui/joy';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Publication from './components/Publications/publication';
 
 
 
@@ -66,7 +67,7 @@ export default function HomePageContent(props: any) {
         Language={props.Language}
         Name={props.data ? props.data.HeaderTitle : ''}
         Notification={props.data ? props.data.Notification : ''}
-        Github={props.data? props.data.Github : ''}
+        Github={props.data ? props.data.Github : ''}
         switchLanguage={props.switchLanguage} />
       <CssBaseline />
       <Toolbar id="back-to-top-anchor" />
@@ -98,14 +99,17 @@ export default function HomePageContent(props: any) {
             <Education Language={props.Language} data={props.data?.Education} />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Publication Language={props.Language} data={props.data?.Publications} />
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Experience Language={props.Language} data={props.data?.Experience} />
           </Grid>
         </Grid>
         <StickyFooter Language={props.Language} />
       </Container>
       <ScrollTop {...props}>
-        <Fab  
-          size="small" 
+        <Fab
+          size="small"
           aria-label="scroll back to top"
           sx={{
             bgcolor: '#D3E4FC',

@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#EAF1FB" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className} style={{background: '#F6F8FC'}}>{children}</body>
     </html>
   );
 }
