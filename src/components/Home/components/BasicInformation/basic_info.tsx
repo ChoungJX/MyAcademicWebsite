@@ -27,7 +27,7 @@ export default function BasicInfo(props: any) {
       <CardMedia
         image={props.Avatar}
         title={props.Name}
-        sx={{ height: "200px", width: 'auto' }}
+        sx={{ minheight: "200px", width: 'auto', height: '320px' }}
       />
       <CardContent>
         <Typography component="p" sx={{ color: '#454746' }}>
