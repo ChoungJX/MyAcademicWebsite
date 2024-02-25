@@ -1,10 +1,9 @@
-import { Stack, Typography } from '@mui/joy';
-import { Card, CardContent, Chip, Divider, Grid, Paper } from '@mui/material';
+import { Chip, Typography } from '@mui/joy';
+import { Card, CardContent, Divider, Paper } from '@mui/material';
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineOppositeContent, TimelineSeparator, timelineItemClasses } from '@mui/lab';
-import React from 'react';
 import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
 import PlaceTwoToneIcon from '@mui/icons-material/PlaceTwoTone';
-import './experience.css'
+import './experience.css';
 
 export default function Experience(props: any) {
 
@@ -36,23 +35,23 @@ export default function Experience(props: any) {
                   <TimelineOppositeContent>
                     <div>
                       <Chip
-                        label={`${row.start_time} - ${row.end_time}`}
-                        deleteIcon={<CalendarMonthTwoToneIcon style={{ color: "#000" }} />}
-                        onDelete={() => { }}
+                        endDecorator={<CalendarMonthTwoToneIcon />}
                         sx={{
-                          bgcolor: '#F2F6FC'
+                          bgcolor: '#F2F6FC',
                         }}
-                      />
+                      >
+                        {`${row.start_time} - ${row.end_time}`}
+                      </Chip>
                       <br />
                       <Chip
-                        label={row.city}
-                        deleteIcon={<PlaceTwoToneIcon style={{ color: "#000" }} />}
-                        onDelete={() => { }}
+                        endDecorator={<PlaceTwoToneIcon />}
                         sx={{
                           bgcolor: '#F2F6FC',
                           mt: '10px',
                         }}
-                      />
+                      >
+                        {row.city}
+                      </Chip>
                     </div>
                   </TimelineOppositeContent>
                   <TimelineSeparator>
@@ -104,23 +103,23 @@ export default function Experience(props: any) {
                   <TimelineOppositeContent>
                     <div>
                       <Chip
-                        label={`${row.start_time} - ${row.end_time}`}
-                        deleteIcon={<CalendarMonthTwoToneIcon style={{ color: "#000" }} />}
-                        onDelete={() => { }}
+                        endDecorator={<CalendarMonthTwoToneIcon />}
                         sx={{
                           bgcolor: '#F2F6FC',
                         }}
-                      />
+                      >
+                        {`${row.start_time} - ${row.end_time}`}
+                      </Chip>
                       <br />
                       <Chip
-                        label={row.city}
-                        deleteIcon={<PlaceTwoToneIcon style={{ color: "#000" }} />}
-                        onDelete={() => { }}
+                        endDecorator={<PlaceTwoToneIcon />}
                         sx={{
                           bgcolor: '#F2F6FC',
                           mt: '10px',
                         }}
-                      />
+                      >
+                        {row.city}
+                      </Chip>
                     </div>
                   </TimelineOppositeContent>
                   <TimelineSeparator>
