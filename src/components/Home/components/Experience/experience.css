@@ -1,11 +1,11 @@
 @media (max-width: 767px) {
-    .experience-full {
-        display: none;
-    }
+  .experience-full {
+    display: none;
+  }
 }
 
 @media (min-width: 767px) {
-    .experience-small {
-        display: none;
-    }
+  .experience-small {
+    display: none;
+  }
 }

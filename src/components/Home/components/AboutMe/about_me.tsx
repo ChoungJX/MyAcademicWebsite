@@ -1,22 +1,20 @@
-import { Typography } from '@mui/joy';
-import { Card, CardContent, Divider } from '@mui/material';
-import React from 'react';
-
+import { Typography } from "@mui/joy";
+import { Card, CardContent, Divider } from "@mui/material";
+import React from "react";
 
 export default function AboutMe(props: any) {
-
   return (
     <Card
       sx={{
-        borderRadius: '12px',
+        borderRadius: "12px",
       }}
     >
       <CardContent>
         <Typography
-          fontSize='26px'
-          fontWeight='bold'
+          fontSize="26px"
+          fontWeight="bold"
           sx={{
-            color: '#454746'
+            color: "#454746",
           }}
         >
           {props.Language?.AboutMe?.title}
@@ -25,7 +23,7 @@ export default function AboutMe(props: any) {
         <Typography
           gutterBottom
           sx={{
-            color: '#454746'
+            color: "#454746",
           }}
         >
           {props.AboutMe}
