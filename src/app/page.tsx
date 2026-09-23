@@ -9,6 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import DataObjectTwoToneIcon from "@mui/icons-material/DataObjectTwoTone";
 import FaceRetouchingNaturalTwoToneIcon from "@mui/icons-material/FaceRetouchingNaturalTwoTone";
 import AbcTwoToneIcon from "@mui/icons-material/AbcTwoTone";
+import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 import HomePageContent from "@/components/Home";
 
 function HomePage() {
@@ -103,11 +104,11 @@ function HomePage() {
   const data = {
     english: {
       Language: "english",
-      UpdatedTime: "February 24, 2024",
+      UpdatedTime: "September 23, 2026",
       HeaderTitle: "Linfeng's Page",
       Name: "Linfeng Zheng",
       Avatar: "/static/images/avatar.jpg",
-      Email: "zheng.l.ab@m.titech.ac.jp",
+      Email: "zheng.l.fe73@m.isct.ac.jp",
       Github: "https://github.com/ChoungJX",
       AboutMe: (
         <div>
@@ -115,14 +116,14 @@ function HomePage() {
           Information and Communications Engineering at{" "}
           <a
             style={{ borderBottom: "1px solid #454746" }}
-            href="https://www.titech.ac.jp/"
+            href="https://www.isct.ac.jp/"
           >
-            Tokyo Institute of Technology
-          </a>
-          . I am interested in diverse research topics that optimize software
-          performance (especially for web applications) for modern
-          high-performance CPUs across diverse computing environments. Now, I am
-          a research assistant supervised by{" "}
+            Institute of Science Tokyo
+          </a>{" "}
+          (formerly Tokyo Institute of Technology). I am interested in diverse
+          research topics that optimize software performance (especially for web
+          applications) for modern high-performance CPUs across diverse
+          computing environments. Now, I am a research assistant supervised by{" "}
           <a
             style={{ borderBottom: "1px solid #454746" }}
             href="https://hiroshi-sasaki.github.io/index-en.html"
@@ -152,6 +153,16 @@ function HomePage() {
         </div>
       ),
       Notification: [
+        {
+          date: "2026-09-23",
+          news: (
+            <>
+              Paper accepted to IEEE CAL
+              <br />
+              Update information
+            </>
+          ),
+        },
         { date: "2024-02-24", news: "Update UI and information" },
         { date: "2023-10-19", news: "Update information" },
         { date: "2021-09-22", news: "My home page is open!" },
@@ -159,13 +170,15 @@ function HomePage() {
       Education: [
         {
           degree:
-            "PhD in Information and Communications Engineering, 2026 (expected)",
-          school: "Tokyo Institute of Technology",
+            "PhD in Information and Communications Engineering, 2027 (expected)",
+          school:
+            "Institute of Science Tokyo (formerly Tokyo Institute of Technology)",
           icon: <MemoryTwoToneIcon sx={{ fontSize: "40px" }} />,
         },
         {
           degree: "M.S. in Information and Communications Engineering, 2023",
-          school: "Tokyo Institute of Technology",
+          school:
+            "Tokyo Institute of Technology (now Institute of Science Tokyo)",
           icon: <MemoryTwoToneIcon sx={{ fontSize: "40px" }} />,
         },
         {
@@ -174,10 +187,25 @@ function HomePage() {
           icon: <WysiwygTwoToneIcon sx={{ fontSize: "40px" }} />,
         },
       ],
+      Publications: [
+        {
+          title:
+            "Improving Indirect Branch Prediction in Interpreters via Hardware/Software Co-Design",
+          authors: (
+            <>
+              <b>Linfeng Zheng</b>, Hiroshi Sasaki
+            </>
+          ),
+          venue: "IEEE Computer Architecture Letters (CAL)",
+          year: "2026",
+          status: "Accepted",
+          icon: <EmailTwoToneIcon sx={{ fontSize: "40px" }} />,
+        },
+      ],
       Experience: [
         {
           start_time: "Jan 2024",
-          end_time: "Present",
+          end_time: "Nov 2024",
           title: "Web Front-end Development",
           location: "MEDIA KOBO, INC.",
           city: "Tokyo Japan",
@@ -234,22 +262,22 @@ function HomePage() {
     },
     chinese: {
       Language: "chinese",
-      UpdatedTime: "2024年2月24日",
+      UpdatedTime: "2026年9月23日",
       HeaderTitle: "郑林峰的主页",
       Name: "郑林峰",
       Avatar: "/static/images/avatar.jpg",
-      Email: "zheng.l.ab@m.titech.ac.jp",
+      Email: "zheng.l.fe73@m.isct.ac.jp",
       Github: "https://github.com/ChoungJX",
       AboutMe: (
         <div>
           我在
           <a
             style={{ borderBottom: "1px solid #454746" }}
-            href="https://www.titech.ac.jp/"
+            href="https://www.isct.ac.jp/"
           >
-            东京工业大学
+            东京科学大学
           </a>
-          情報通信系获得了硕士学位并在继续攻读博士学位。
+          （原东京工业大学）情報通信系获得了硕士学位并在继续攻读博士学位。
           <br />
           我对软件性能优化的各种主题感兴趣，并致力于优化跨不同计算环境的软件性能（特别是Web应用）。我的指导老师是
           <a
@@ -271,19 +299,20 @@ function HomePage() {
         </div>
       ),
       Notification: [
+        { date: "2026-09-23", news: "论文被IEEE CAL录用，信息更新" },
         { date: "2024-02-24", news: "UI和信息更新" },
         { date: "2023-10-19", news: "信息更新" },
         { date: "2021-09-22", news: "个人主页已经开放！" },
       ],
       Education: [
         {
-          degree: "工学博士学位，信息与通信工程专业，预计2026年毕业",
-          school: "东京工业大学",
+          degree: "工学博士学位，信息与通信工程专业，预计2027年毕业",
+          school: "东京科学大学（原东京工业大学）",
           icon: <MemoryTwoToneIcon sx={{ fontSize: "40px" }} />,
         },
         {
           degree: "工学硕士学位，信息与通信工程专业，2023年毕业",
-          school: "东京工业大学",
+          school: "东京工业大学（现东京科学大学）",
           icon: <MemoryTwoToneIcon sx={{ fontSize: "40px" }} />,
         },
         {
@@ -292,10 +321,25 @@ function HomePage() {
           icon: <WysiwygTwoToneIcon sx={{ fontSize: "40px" }} />,
         },
       ],
+      Publications: [
+        {
+          title:
+            "Improving Indirect Branch Prediction in Interpreters via Hardware/Software Co-Design",
+          authors: (
+            <>
+              <b>Linfeng Zheng</b>, Hiroshi Sasaki
+            </>
+          ),
+          venue: "IEEE Computer Architecture Letters (CAL)",
+          year: "2026",
+          status: "已录用",
+          icon: <EmailTwoToneIcon sx={{ fontSize: "40px" }} />,
+        },
+      ],
       Experience: [
         {
           start_time: "2024年1月",
-          end_time: "至今",
+          end_time: "2024年11月",
           title: "网页前端开发",
           location: "MEDIA KOBO, INC.",
           city: "日本，东京",

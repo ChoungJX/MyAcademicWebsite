@@ -21,6 +21,7 @@ export default function AboutMe(props: any) {
         </Typography>
         <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
         <Typography
+          component="div"
           gutterBottom
           sx={{
             color: "#454746",

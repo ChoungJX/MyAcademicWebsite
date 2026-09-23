@@ -15,6 +15,7 @@ export default function StickyFooter(props: any) {
       }}
     >
       <Typography
+        component='div'
         fontSize='16px'
       >
         {props.Language?.Footer?.content}
