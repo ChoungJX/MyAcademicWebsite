@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import { LANGS } from '../data/shared';
+import { pathFor } from '../data';
+import type { Page } from '../data';
+import type { Content } from '../data/types';
+
+interface Props {
+  t: Content;
+  page: Page;
+}
+
+const { t, page } = Astro.props;
+const site = Astro.site ?? new URL('https://me.rabbitravel.xyz');
+const title = { home: t.meta.homeTitle, profile: t.meta.profileTitle, news: t.meta.newsTitle }[page];
+const url = (lang: Content['lang']) => new URL(pathFor(lang, page), site).href;
+const ogImage = new URL(`/static/images/og-${t.lang}.png`, site).href;
+// The profile and News pages share the paper look (body.paper).
+const bodyClass = page === 'home' ? 'home' : 'paper';
+
+// The home stages are drawn at a fixed size (1440x900 desktop, 390 wide mobile) and scaled
+// to the viewport. Runs before first paint and again on resize.
+const STAGE_SCRIPT = `(function () {
+  var root = document.documentElement;
+  function fit() {
+    var w = root.clientWidth || window.innerWidth;
+    var h = window.innerHeight;
+    root.style.setProperty('--desk-scale', String(Math.min(w / 1440, h / 900)));
+    root.style.setProperty('--mob-scale', String(Math.min(w, 480) / 390));
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  document.addEventListener('DOMContentLoaded', fit);
+})();`;
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={t.meta.description} />
+    <meta name="theme-color" content={page === 'home' ? '#0b0b0f' : '#dcdad0'} />
+    <link rel="canonical" href={url(t.lang)} />
+    {LANGS.map((l) => <link rel="alternate" hreflang={l.htmlLang} href={url(l.lang)} />)}
+    <link rel="alternate" hreflang="x-default" href={url('en')} />
+    {/* The preview a chat app or social site shows for a link. The cards are drawn by scripts/og.mjs. */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={url(t.lang)} />
+    {LANGS.map((l) => <meta property={l.lang === t.lang ? 'og:locale' : 'og:locale:alternate'} content={l.ogLocale} />)}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {/* Drawn by scripts/favicon.mjs. The ICO's sizes keeps Chrome from choosing it over the SVG. */}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {/* Served from this site (scripts/fonts.mjs), so no page loads anything from another server. */}
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    {page === 'home' && <script is:inline set:html={STAGE_SCRIPT} />}
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

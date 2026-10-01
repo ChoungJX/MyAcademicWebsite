@@ -1,0 +1,1817 @@
+/* ---------- tokens ---------- */
+:root {
+  --ink: #0b0b0f;
+  --chalk: #f3f1ea;
+  --paper: #dcdad0;
+  --graphite: #1b1b1f;
+  --violet: #5b47d6;
+  --violet-hi: #8e7cf0;
+  --violet-deep: #3a2e8c;
+  --win: #f4f2ff;
+  --win-well: #d9d3fa;
+  --btn: #e9e6ff;
+  --bevel-hi: #ffffff;
+  --bevel-lo: #2a2266;
+  --yellow: #ffd84d;
+  --terminal: #c8bfff;
+  --scribble: #77728a;
+  --muted-dark: #9a95ab;
+  --muted-paper: #4a4a44;
+  --subtle-paper: #3a3a44;
+  --edu-cell: #e6e0f8;
+  --rule: #6b6a62;
+
+  --font-body: 'Zen Kaku Gothic New', 'Noto Sans SC', sans-serif;
+  --font-pixel: 'DotGothic16', 'Noto Sans SC', monospace;
+  /* Pixel-style labels that get translated. DotGothic16 has no simplified Chinese glyphs,
+     so Chinese pages set these in Noto Sans SC instead of mixing two fonts in one word. */
+  --font-label: var(--font-pixel);
+  --font-hand: 'Reenie Beanie', cursive;
+  /* 郑林峰 needs a simplified glyph; 鄭林峰 renders fine in the pixel font. */
+  --font-name: 'Noto Sans SC', sans-serif;
+}
+
+:root:lang(zh) {
+  --font-body: 'Noto Sans SC', 'Zen Kaku Gothic New', sans-serif;
+  --font-label: 'Noto Sans SC', sans-serif;
+}
+
+:root:lang(ja) {
+  --font-name: var(--font-pixel);
+}
+
+/* ---------- base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+.name-local {
+  font-family: var(--font-name);
+}
+
+.credit {
+  margin: 0;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.credit a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+/* ---------- home: fixed-size stages scaled to the viewport ---------- */
+body.home {
+  background: var(--ink);
+  color: var(--chalk);
+}
+
+.home-desktop {
+  display: none;
+}
+
+.stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--chalk);
+}
+
+.stage--desktop {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1440px;
+  height: 900px;
+  transform: translate(-50%, -50%) scale(var(--desk-scale, 1));
+}
+
+.stage-box {
+  width: calc(390px * var(--mob-scale, 1));
+  height: calc(1099px * var(--mob-scale, 1));
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.stage--mobile {
+  width: 390px;
+  height: 1099px;
+  transform: scale(var(--mob-scale, 1));
+  transform-origin: 0 0;
+}
+
+@media (min-width: 900px) {
+  .home-desktop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .home-mobile {
+    display: none;
+  }
+}
+
+.scene-doodles {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.px-star {
+  position: absolute;
+  pointer-events: none;
+}
+
+.note {
+  position: absolute;
+  font-family: var(--font-hand);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.home-name {
+  position: absolute;
+  margin: 0;
+  font-family: var(--font-hand);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--chalk);
+  white-space: nowrap;
+  transform: rotate(-4deg);
+  transform-origin: left center;
+}
+
+.home-name--desktop {
+  left: 84px;
+  top: 28px;
+  font-size: 120px;
+  text-shadow: 0 0 2px var(--ink), 3px 3px 0 var(--ink), 7px 7px 0 var(--violet);
+}
+
+.home-name--mobile {
+  left: 14px;
+  top: 12px;
+  font-size: 58px;
+  text-shadow: 0 0 2px var(--ink), 2px 2px 0 var(--ink), 4px 4px 0 var(--violet);
+}
+
+.chips {
+  position: absolute;
+  display: flex;
+  font-family: var(--font-label);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.chips--desktop {
+  left: 104px;
+  top: 172px;
+  letter-spacing: 0.08em;
+}
+
+.chips--mobile {
+  left: 14px;
+  top: 80px;
+  letter-spacing: 0.06em;
+}
+
+.chip-name {
+  background: var(--chalk);
+  color: var(--ink);
+}
+
+.chip-role {
+  background: var(--ink);
+  color: var(--chalk);
+}
+
+.chips--desktop .chip-name {
+  padding: 5px 8px;
+}
+
+.chips--desktop .chip-role {
+  padding: 5px 10px;
+}
+
+.chips--mobile .chip-name {
+  padding: 5px 7px;
+}
+
+.chips--mobile .chip-role {
+  padding: 5px 8px;
+}
+
+/* Phone home: a shortcut to ABOUT under the chips. It stays above the moon's layer, whose
+   button reaches up to this corner. */
+.about-chip {
+  position: absolute;
+  left: 14px;
+  top: 116px;
+  z-index: 1;
+  padding: 5px 8px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-label);
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+}
+
+.about-chip:hover {
+  background: var(--chalk);
+}
+
+.home-nav {
+  position: absolute;
+  left: 64px;
+  top: 268px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.12em;
+}
+
+/* The nav types itself out after the page loads, after zutomayo.net's top page. Each link
+   shows one of its --n characters per step, and the links start 0.1s apart (--i). */
+.home-nav a {
+  align-self: flex-start;
+  /* Backwards only: once typed, the clip goes away and focus outlines show again. */
+  animation: nav-type calc(var(--n) * 40ms) steps(var(--n)) calc(1s + var(--i) * 0.1s) backwards;
+}
+
+@keyframes nav-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+.home-nav a:hover,
+.home-foot a:hover {
+  color: var(--yellow);
+}
+
+.home-langs {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  letter-spacing: 0.04em;
+}
+
+.home-langs a[aria-current='page'] {
+  padding: 0 5px;
+  background: var(--chalk);
+  color: var(--ink);
+}
+
+.home-langs a[aria-current='page']:hover {
+  color: var(--ink);
+}
+
+.home-foot {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Left of the nav column: from x 64 the four links would run under paper.pdf (x 330). */
+.home-foot--desktop {
+  left: 24px;
+  top: 792px;
+}
+
+/* Pinned by its bottom edge, so a credit that wraps grows the footer upward. */
+.home-foot--mobile {
+  left: 16px;
+  bottom: 28px;
+}
+
+.home-links {
+  display: flex;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.home-links a {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--chalk);
+}
+
+.home-foot--desktop .home-links {
+  gap: 8px;
+  letter-spacing: 0.08em;
+}
+
+.home-foot--desktop .home-links a {
+  padding: 7px 8px;
+}
+
+.home-foot--mobile .home-links {
+  gap: 8px;
+  letter-spacing: 0.06em;
+}
+
+.home-foot--mobile .home-links a {
+  height: 40px;
+  padding: 0 10px;
+}
+
+.home-foot .credit {
+  color: var(--muted-dark);
+}
+
+/* Stops short of the ramen doodle. The Japanese credit spells out the band's full name,
+   so it wraps before the link. */
+.home-foot--mobile .credit {
+  max-width: 225px;
+}
+
+/* Interactive layer on top of a stage: the moon and the windows. */
+.win-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.win-layer > * {
+  pointer-events: auto;
+}
+
+.moon-btn {
+  position: absolute;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.moon-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Win95-style windows ---------- */
+.win {
+  position: absolute;
+  background: var(--win);
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.win--dark {
+  background: var(--ink);
+  box-shadow: 6px 6px 0 var(--violet);
+}
+
+.win--mobile {
+  box-shadow: 5px 5px 0 var(--violet);
+}
+
+/* Home windows zoom open from their centers, one after another (--pop comes from PopWindow.tsx),
+   after zutomayo.net's top page. The easing is easeOutSine. */
+.win--pop {
+  animation: win-pop 0.5s cubic-bezier(0.61, 1, 0.88, 1) both;
+  animation-delay: var(--pop, 0s);
+}
+
+@keyframes win-pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+.win__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 3px 0 10px;
+  background: var(--violet);
+  border-bottom: 2px solid var(--ink);
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+  user-select: none;
+}
+
+.win__bar--drag {
+  cursor: grab;
+  touch-action: none;
+}
+
+.win__bar--drag:active {
+  cursor: grabbing;
+}
+
+.win__title {
+  flex-grow: 1;
+}
+
+.win__close,
+.win__min {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 24px;
+  padding: 0;
+  background: var(--btn);
+  border: 2px solid;
+  border-color: var(--bevel-hi) var(--bevel-lo) var(--bevel-lo) var(--bevel-hi);
+  color: var(--ink);
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.btn95 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 38px;
+  padding: 0 16px;
+  background: var(--btn);
+  border: 2px solid;
+  border-color: var(--bevel-hi) var(--bevel-lo) var(--bevel-lo) var(--bevel-hi);
+  outline: 2px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--font-label);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.btn95--mobile {
+  min-width: 124px;
+  height: 44px;
+  padding: 0 14px;
+}
+
+.btn95--primary {
+  gap: 10px;
+  height: 44px;
+  background: var(--violet);
+  border-color: var(--violet-hi) var(--bevel-lo) var(--bevel-lo) var(--violet-hi);
+  color: #ffffff;
+}
+
+.btn95:active,
+.win__close:active,
+.win__min:active {
+  border-color: var(--bevel-lo) var(--bevel-hi) var(--bevel-hi) var(--bevel-lo);
+}
+
+.btn95:focus-visible {
+  outline: 2px solid var(--ink);
+  box-shadow: 0 0 0 5px var(--yellow);
+}
+
+/* News window */
+.news-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 18px 20px;
+}
+
+.win--mobile .news-body {
+  padding: 16px 16px 18px;
+}
+
+.news-msg {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.news-msg svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.news-msg p {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--graphite);
+}
+
+.win--mobile .news-msg p {
+  font-size: 16px;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.win--mobile .btn-row {
+  gap: 14px;
+}
+
+/* paper.pdf window */
+.paper-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: var(--win-well);
+}
+
+.paper-sheet {
+  height: 212px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--violet);
+}
+
+.paper-sheet img {
+  display: block;
+  width: 266px;
+  height: 210px;
+}
+
+.paper-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.paper-status {
+  padding: 5px 8px;
+  background: var(--violet);
+  color: #ffffff;
+  font-family: var(--font-label);
+}
+
+.paper-venue {
+  color: var(--graphite);
+}
+
+.paper-body .btn95 {
+  align-self: center;
+}
+
+/* contact.exe window */
+.contact-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px 18px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-row svg {
+  flex-shrink: 0;
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.contact-text p {
+  margin: 0;
+}
+
+.contact-msg {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--graphite);
+}
+
+.contact-mail {
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--muted-paper);
+  white-space: nowrap;
+}
+
+/* whoami.sh window */
+.neo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--terminal);
+}
+
+.win--mobile .neo {
+  padding: 14px 14px 16px;
+}
+
+.neo__row {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.win--mobile .neo__row {
+  gap: 14px;
+}
+
+.neo__row img {
+  flex-shrink: 0;
+  display: block;
+  width: 120px;
+  height: 150px;
+  margin-top: 4px;
+}
+
+.neo__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.neo__key,
+.neo__prompt {
+  color: var(--yellow);
+}
+
+.neo__at {
+  color: var(--chalk);
+}
+
+/* Links keep the terminal's colors; the underline marks them. */
+.neo__link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.neo__link:hover {
+  color: var(--yellow);
+}
+
+/* The host in linfeng@science-tokyo links to the school but stays yellow like the user name. */
+.neo__key.neo__link:hover {
+  color: var(--terminal);
+}
+
+/* whoami.sh types its command once the window has popped open, pauses as if Enter was hit,
+   then prints the card. Times count from --pop; --n is the command's length. */
+.neo {
+  --type-at: calc(var(--pop, 0s) + 0.8s);
+  --enter-at: calc(var(--type-at) + var(--n) * 70ms + 0.3s);
+}
+
+.neo__typed {
+  display: inline-block;
+  width: calc(var(--n) * 1ch);
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: neo-type calc(var(--n) * 70ms) steps(var(--n)) var(--type-at) both;
+}
+
+@keyframes neo-type {
+  from {
+    width: 0;
+  }
+}
+
+/* Solid while typing, gone after Enter; the blinking .cursor waits on the next prompt. */
+.neo__caret {
+  display: inline-block;
+  width: 10px;
+  height: 16px;
+  vertical-align: -2px;
+  background: var(--terminal);
+  animation: neo-enter 1ms var(--enter-at) both;
+}
+
+@keyframes neo-enter {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* The output keeps its space while hidden, so the window doesn't change size. */
+.neo__out {
+  animation: neo-print 1ms var(--enter-at) both;
+}
+
+/* The next command, `more about me`, types itself out on the last prompt after the card. Its own
+   --n (set inline) is the command's length; --enter-at still comes from .neo. */
+.neo__next {
+  --type-at: calc(var(--enter-at) + 0.6s);
+}
+
+@keyframes neo-print {
+  from {
+    visibility: hidden;
+  }
+}
+
+.neo__cont {
+  padding-left: 10ch;
+}
+
+.neo__indent {
+  padding-left: 2ch;
+}
+
+.neo__palette {
+  display: flex;
+  margin-top: 10px;
+}
+
+.neo__palette span {
+  width: 24px;
+  height: 16px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 16px;
+  vertical-align: -2px;
+  background: var(--terminal);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- menu drawer ---------- */
+.menu-trigger {
+  position: fixed;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-trigger .bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-trigger .bars span {
+  display: block;
+  width: 22px;
+  height: 4px;
+  background: currentColor;
+}
+
+.menu-trigger--box {
+  top: 20px;
+  right: max(12px, calc((100vw - 480px) / 2 + 12px));
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: var(--ink);
+  border: 2px solid var(--chalk);
+  color: var(--chalk);
+}
+
+.menu-trigger--box .bars {
+  gap: 5px;
+}
+
+.menu-trigger--text {
+  top: 16px;
+  left: 16px;
+  height: 44px;
+  gap: 10px;
+  padding: 0 10px 0 6px;
+  background: var(--paper);
+  border: 0;
+  color: var(--graphite);
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  letter-spacing: 0.12em;
+}
+
+.menu-trigger--text .bars span {
+  background: var(--ink);
+}
+
+.menu-trigger--text:hover {
+  color: var(--violet);
+}
+
+.menu-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+}
+
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  width: 300px;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 84px 24px 40px 32px;
+  background: var(--violet);
+  border-right: 2px solid var(--ink);
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  animation: menu-in 0.3s ease-out;
+}
+
+@keyframes menu-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.menu__close {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Menu items and language links (MenuLinks), shared by the drawer and the menu window. */
+.menu__list,
+.menu__sub {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+.menu__sub {
+  margin: 2px 0 0 20px;
+}
+
+.menu__sub a {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+.menu__langs {
+  --pad: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.menu__langs a {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 var(--pad);
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+/* A plain first link gives back its padding, so its text lines up with the menu labels
+   (a highlighted one lines up by its chip's edge). */
+.menu__langs a:first-child:not([aria-current='page']) {
+  margin-left: calc(-1 * var(--pad));
+}
+
+/* In the violet drawer */
+.menu .menu__list {
+  gap: 4px;
+}
+
+.menu .menu__sub a {
+  color: var(--btn);
+}
+
+.menu a:hover {
+  color: var(--yellow);
+}
+
+.menu .menu__langs {
+  margin-top: 36px;
+}
+
+.menu .menu__langs a[aria-current='page'],
+.menu .menu__langs a[aria-current='page']:hover {
+  background: var(--chalk);
+  color: var(--ink);
+}
+
+/* ---------- menu window (desktop profile page) ---------- */
+.win--menu {
+  position: fixed;
+  z-index: 30;
+  display: none;
+}
+
+/* contact.exe fixed to the screen (ContactPopup). It stays above the menu window and under the
+   phone drawer, and is centered until it is dragged. */
+.win--popup {
+  position: fixed;
+  z-index: 31;
+  max-width: calc(100vw - 24px);
+}
+
+.win--center {
+  inset: 0;
+  height: fit-content;
+  margin: auto;
+}
+
+/* The line under the title bar moves to the menu body, so a folded window has a single border. */
+.win--menu .win__bar {
+  border-bottom: 0;
+}
+
+.menu-win {
+  padding: 12px 16px 16px 18px;
+  border-top: 2px solid var(--ink);
+  font-family: var(--font-pixel);
+}
+
+.menu-win .menu__item {
+  gap: 10px;
+  height: 36px;
+}
+
+.menu-win .menu__sub {
+  margin-top: 0;
+}
+
+.menu-win .menu__sub a {
+  height: 28px;
+}
+
+.menu-win a:hover {
+  color: var(--violet);
+}
+
+.menu-win .menu__langs {
+  --pad: 7px;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dotted var(--ink);
+}
+
+.menu-win .menu__langs a {
+  height: 28px;
+}
+
+.menu-win .menu__langs a[aria-current='page'],
+.menu-win .menu__langs a[aria-current='page']:hover {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+@media (min-width: 900px) {
+  .win--menu {
+    display: block;
+  }
+}
+
+/* ---------- profile and News pages ---------- */
+body.paper {
+  background: var(--paper) url('/static/images/paper-mobile.svg') top center / 390px auto no-repeat;
+  color: var(--graphite);
+}
+
+body.paper :focus-visible {
+  outline-color: var(--violet);
+}
+
+.profile-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.profile-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 76px;
+}
+
+.profile-name {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+  transform: rotate(-3deg);
+}
+
+.label {
+  margin: 0;
+  align-self: flex-start;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  font-size: 24px;
+  padding: 2px 9px 5px;
+}
+
+.profile-head .label {
+  align-self: auto;
+  font-size: 22px;
+}
+
+.side-tab {
+  display: none;
+}
+
+.corner-moon {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 44px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-main {
+  width: min(760px, calc(100% - 40px));
+  margin: 48px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.profile-main section {
+  display: flex;
+  flex-direction: column;
+  scroll-margin-top: 72px;
+}
+
+.profile-main h2 {
+  margin-bottom: 6px;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.about p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.about a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about a:hover {
+  color: var(--violet);
+}
+
+.news-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--graphite);
+}
+
+.news-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.news-date {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.tag-new {
+  padding: 3px 6px;
+  background: var(--violet);
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.news-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 14px;
+  background: var(--ink);
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.btn-ink:hover {
+  color: var(--terminal);
+}
+
+.news-item .btn-ink {
+  align-self: center;
+  margin-top: 10px;
+  padding: 0 16px;
+}
+
+/* The News page: one section per year, headed by the year. */
+.news-archive {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.label--year {
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  padding: 3px 9px 4px;
+}
+
+.pub {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--graphite);
+}
+
+.pub-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.pub-year {
+  padding: 4px 8px;
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.pub h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.pub p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.pub-me {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pub-venue {
+  color: var(--subtle-paper);
+}
+
+.pub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.pub-status {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  background: var(--violet);
+  color: #ffffff;
+  font-family: var(--font-label);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.pub-actions .btn-ink[aria-expanded='true'],
+.pub-actions .btn-ink[aria-expanded='true']:hover {
+  background: var(--violet);
+  color: #ffffff;
+}
+
+/* BibTeX box under a paper */
+.bib {
+  margin-top: 6px;
+  background: #ffffff;
+  border: 2px solid var(--ink);
+}
+
+.bib-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding-left: 12px;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.bib-copy {
+  align-self: stretch;
+  min-width: 88px;
+  padding: 0 14px;
+  background: var(--violet);
+  border: 0;
+  color: #ffffff;
+  font-family: var(--font-label);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.bib-copy:hover {
+  background: var(--violet-deep);
+}
+
+.bib pre {
+  margin: 0;
+  padding: 14px 16px 16px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--graphite);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.btn-soon {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  color: var(--muted-paper);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.edu-table {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #ffffff;
+  border: 2px solid var(--violet);
+}
+
+.edu-head {
+  padding: 10px 12px;
+  background: var(--violet);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.edu-table dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.edu-row {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 2px;
+}
+
+.edu-row dt {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 12px;
+  background: var(--violet);
+  color: #ffffff;
+}
+
+.edu-degree {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.edu-year {
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.edu-row dd {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px;
+  background: var(--edu-cell);
+}
+
+.edu-field {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.edu-school {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--subtle-paper);
+}
+
+.edu-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--muted-paper);
+}
+
+.job {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--graphite);
+}
+
+.job-period {
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.job-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.job-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.job-org {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--subtle-paper);
+}
+
+.job-desc {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.profile-main .contact-lead {
+  margin: 12px 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.contact-links a:hover {
+  color: var(--terminal);
+}
+
+.contact-links span {
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  color: var(--terminal);
+}
+
+.profile-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0 60px;
+}
+
+/* Pixel-font ink button: BACK HOME and ALL NEWS. */
+.btn-pixel {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 18px;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  letter-spacing: 0.12em;
+}
+
+.btn-pixel:hover {
+  color: var(--terminal);
+}
+
+/* Under the profile's newest news, to the News page. */
+.all-news {
+  align-self: flex-end;
+  height: 44px;
+  margin-top: 20px;
+}
+
+.profile-foot .credit {
+  color: var(--muted-paper);
+}
+
+.profile-foot .credit a:hover {
+  color: var(--violet);
+}
+
+@media (min-width: 900px) {
+  body.paper {
+    background-image: url('/static/images/paper-desktop.svg');
+    background-size: 1440px auto;
+  }
+
+  .profile-drawer {
+    display: none;
+  }
+
+  /* One column for the heading and the content. It stays centered on wide screens and moves
+     right on narrower ones, clear of the menu window (left) and the HOME tab (right). */
+  .profile-head,
+  .profile-main {
+    width: min(760px, calc(100% - 368px));
+    margin-left: max(300px, calc((100% - 760px) / 2));
+  }
+
+  .profile-head {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 28px;
+    padding-top: 40px;
+  }
+
+  .profile-name {
+    font-size: 92px;
+  }
+
+  .label,
+  .profile-head .label {
+    font-size: 28px;
+    padding: 2px 10px 6px;
+  }
+
+  .label--year {
+    font-size: 22px;
+    padding: 3px 10px 4px;
+  }
+
+  .news-archive {
+    gap: 48px;
+  }
+
+  .corner-moon {
+    display: none;
+  }
+
+  /* Stays on screen like menu.exe. At 560 on a 900px-tall window, as designed; shorter windows
+     move it up to keep the 120px below it, so it is never cut off. */
+  .side-tab {
+    position: fixed;
+    right: 0;
+    top: clamp(16px, calc(100svh - 340px), 560px);
+    width: 44px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--violet);
+    color: #ffffff;
+    font-family: var(--font-pixel);
+    font-size: 16px;
+    letter-spacing: 0.24em;
+    writing-mode: vertical-rl;
+  }
+
+  .side-tab:hover {
+    color: var(--yellow);
+  }
+
+  .profile-main {
+    margin-top: 88px;
+    gap: 64px;
+  }
+
+  .profile-main h2 {
+    margin-bottom: 8px;
+  }
+
+  .about p {
+    font-size: 17px;
+  }
+
+  .news-item {
+    padding: 20px 0;
+  }
+
+  .news-date {
+    font-size: 16px;
+  }
+
+  .news-text {
+    font-size: 17px;
+  }
+
+  .news-item .btn-ink {
+    height: auto;
+    padding: 8px 14px;
+  }
+
+  .pub {
+    padding: 24px 0;
+  }
+
+  .pub h3 {
+    font-size: 22px;
+  }
+
+  .pub p {
+    font-size: 16px;
+  }
+
+  .pub-status {
+    height: auto;
+    padding: 6px 10px;
+  }
+
+  .pub-actions .btn-ink {
+    height: auto;
+    padding: 9px 14px;
+  }
+
+  .btn-soon {
+    height: auto;
+    padding: 8px 13px;
+  }
+
+  .edu-table {
+    margin-top: 12px;
+  }
+
+  .edu-head {
+    padding: 12px 16px;
+    font-size: 18px;
+  }
+
+  .edu-row {
+    grid-template-columns: 160px minmax(0, 1fr);
+  }
+
+  .edu-row dt {
+    padding: 16px 18px;
+  }
+
+  .edu-degree {
+    font-size: 18px;
+  }
+
+  .edu-row dd {
+    padding: 16px 20px;
+  }
+
+  .edu-field {
+    font-size: 17px;
+  }
+
+  .edu-school {
+    font-size: 15px;
+  }
+
+  .job {
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .job-title {
+    font-size: 17px;
+  }
+
+  .job-org {
+    font-size: 15px;
+  }
+
+  .profile-main .contact-lead {
+    margin-top: 12px;
+    font-size: 17px;
+  }
+
+  /* Two by two: the four links don't fit on one line. */
+  .contact-links {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-items: start;
+    gap: 12px;
+  }
+
+  .contact-links a {
+    padding: 0 16px;
+    font-size: 15px;
+  }
+
+  .profile-foot {
+    padding: 24px 0 80px;
+  }
+
+  .btn-pixel {
+    padding: 0 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .cursor,
+  .win--pop,
+  .home-nav a,
+  .neo__typed,
+  .neo__out {
+    animation: none;
+  }
+
+  .neo__caret {
+    display: none;
+  }
+}

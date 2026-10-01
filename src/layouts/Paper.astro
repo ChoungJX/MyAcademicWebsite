@@ -1,0 +1,45 @@
+---
+// The profile and News pages ("Paper & Graphite"): the menus, contact.exe, the header and the
+// footer around the page's own sections, which go in the slot.
+import Base from './Base.astro';
+import MenuDrawer from '../components/MenuDrawer';
+import MenuWindow from '../components/MenuWindow';
+import ContactPopup from '../components/windows/ContactPopup';
+import { ProfileFooter, ProfileHeader } from '../components/profile/sections';
+import type { Page } from '../data';
+import type { Content } from '../data/types';
+
+interface Props {
+  t: Content;
+  page: Exclude<Page, 'home'>;
+}
+
+const { t, page } = Astro.props;
+const LABELS = { profile: 'PROFILE', news: 'NEWS' };
+---
+
+<Base t={t} page={page}>
+  <div class="profile-drawer">
+    <MenuDrawer
+      client:media="(max-width: 899.98px)"
+      lang={t.lang}
+      page={page}
+      variant="text"
+      labels={{ open: t.ui.openMenu, close: t.ui.closeMenu, languages: t.ui.languages }}
+    />
+  </div>
+  <MenuWindow
+    client:media="(min-width: 900px)"
+    lang={t.lang}
+    page={page}
+    labels={{ minimize: t.ui.minimizeMenu, restore: t.ui.restoreMenu, languages: t.ui.languages }}
+  />
+  <ContactPopup client:load contact={t.windows.contact} closeLabel={t.ui.close} />
+  <div class="profile-page">
+    <ProfileHeader t={t} label={LABELS[page]} />
+    <main class="profile-main">
+      <slot />
+      <ProfileFooter t={t} />
+    </main>
+  </div>
+</Base>

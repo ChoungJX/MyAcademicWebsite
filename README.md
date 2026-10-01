@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Linfeng Zheng · personal page
 
-## Getting Started
+Source of <https://me.rabbitravel.xyz/>, a small personal card site. Style inspired by [ZUTOMAYO](https://zutomayo.net/).
 
-First, run the development server:
+Built with [Astro](https://astro.build/) and React. Every page is static HTML; only the draggable windows, the menu and the BibTeX box ship JavaScript (React islands).
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
+yarn dev       # http://localhost:4321
+yarn build     # static site in out/
+yarn preview   # serve out/ locally
+yarn run check # type-check the .astro, .ts and .tsx files
+yarn favicon   # redraw the site icon after editing scripts/favicon.mjs
+yarn og        # redraw the link-preview cards after editing scripts/og.mjs or the icon (needs Chrome)
+yarn fonts     # copy the web fonts from Google Fonts into public/fonts/ after editing scripts/fonts.mjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Plain `yarn check` is a Yarn built-in, so the type check needs `yarn run check`. `astro check` doesn't support TypeScript 7 yet, so `typescript` stays on 6. `@emnapi/runtime` is only listed because Yarn 1 doesn't install peer dependencies, and `@astrojs/check` needs this one.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Edit content
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+All text lives in `src/data/`:
 
-## Learn More
+- `en.ts`, `zh.ts`, `ja.ts`: per-language content (news, publications, education, experience, window text). English and Chinese are written for different readers, so they are not translations of each other; Japanese follows the English version.
+- `index.ts`: routes, and the profile sections (`SECTIONS`), whose labels the section headings, the home nav and both menus share.
+- `shared.ts`: links, the whoami card, and the CAL paper's shared fields, including its BibTeX. The BibTeX is IEEE Xplore's "Cite This" entry for the Early Access version; copy it again once the paper is in an issue.
 
-To learn more about Next.js, take a look at the following resources:
+Routes: `/` (English), `/zh/` and `/ja/`, each with a `profile/` page and a `news/` page. The profile shows the three newest news items; the News page lists them all by year.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. `yarn build`
+2. Upload `out/`
+3. Purge the Cloudflare cache
 
-## Deploy on Vercel
+## Where things are
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `src/pages/[...lang]/`: home, profile and News pages for every language
+- `src/layouts/`: `Base.astro` (the `<head>`) and `Paper.astro`, the frame the profile and News pages share (menus, contact.exe, header, footer)
+- `src/components/home/`: static parts of the home page. It is drawn at a fixed size (1440×900 on desktop, 390 wide on phones) and scaled to fit the screen.
+- `src/components/windows/`: Win95-style windows. Every MAIL link opens contact.exe instead of the mail app (`mail.ts`): the one on the desktop home, or `ContactPopup.tsx` on the other pages. `drag.ts` drags all of them by the title bar.
+- `src/components/MenuDrawer.tsx`: burger menu on phones
+- `src/components/MenuWindow.tsx`: menu window pinned to the top left of the desktop profile and News pages
+- `src/components/MenuLinks.tsx`: the menu items and language links both of them show
+- `src/components/ContactLink.tsx` and `LangSwitch.tsx`: the MAIL / GITHUB / ORCID / EAT? links and the language links, used by the menus, the home page and the profile page
+- `src/components/profile/`: profile and News page sections, plus the publication entry with its BibTeX box
+- `src/styles/global.css`: all styles and color tokens
+- `public/static/images/`: images
+- `public/fonts/`: the web fonts, served from the site itself because Google Fonts is blocked in mainland China. `scripts/fonts.mjs` copies them from Google Fonts: every slice Google splits each font into (the browser only downloads the ones a page uses), the `fonts.css` that the pages and `og.mjs` link, and each family's license (`OFL.txt`).
+- `scripts/favicon.mjs`: the site icon, the home page's moon drawn on a 16×16 pixel grid. It writes `public/favicon.svg`, `favicon.ico` (16, 32 and 48 px) and `apple-touch-icon.png` (180 px, for iPhone home screens).
+- `scripts/og.mjs`: the card a chat app or social site shows when someone shares a link to the site (Open Graph image), one per language. It renders them with the local Chrome into `public/static/images/og-{en,zh,ja}.png`; set `CHROME` if Chrome is not in `/Applications`. Apps that show a square thumbnail crop the middle of the card, so the icon, name and labels stay there.

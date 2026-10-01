@@ -1,0 +1,15 @@
+---
+import Paper from '../../layouts/Paper.astro';
+import { NewsArchive } from '../../components/profile/sections';
+import { getContent, langPaths } from '../../data';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const t = getContent(Astro.params.lang);
+---
+
+<Paper t={t} page="news">
+  <NewsArchive t={t} />
+</Paper>

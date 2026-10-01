@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+import { DesktopScene, MobileScene } from '../../components/home/HomeScenes';
+import DesktopWindows from '../../components/windows/DesktopWindows';
+import MobileWindows from '../../components/windows/MobileWindows';
+import ContactPopup from '../../components/windows/ContactPopup';
+import MenuDrawer from '../../components/MenuDrawer';
+import { getContent, langPaths, pathFor } from '../../data';
+import { ADVISOR_URL, ISCT_URL, LAB_URL, localPage } from '../../data/shared';
+import type { WindowsProps } from '../../components/windows/types';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const t = getContent(Astro.params.lang);
+const latest = t.news.find((n) => n.isNew) ?? t.news[0];
+const windows: WindowsProps = {
+  w: t.windows,
+  ui: t.ui,
+  nameLocal: t.nameLocal,
+  newsTitle: `News ${latest.date}`,
+  links: {
+    news: pathFor(t.lang, 'profile', 'news'),
+    pubs: pathFor(t.lang, 'profile', 'pubs'),
+    about: pathFor(t.lang, 'profile', 'about'),
+    school: localPage(t.lang, ISCT_URL),
+    lab: localPage(t.lang, LAB_URL),
+    advisor: localPage(t.lang, ADVISOR_URL),
+  },
+};
+---
+
+<Base t={t} page="home">
+  <div class="home-desktop">
+    <div class="stage stage--desktop">
+      <DesktopScene t={t} />
+      <DesktopWindows client:media="(min-width: 900px)" {...windows} />
+    </div>
+  </div>
+
+  <div class="home-mobile">
+    <div class="stage-box">
+      <div class="stage stage--mobile">
+        <MobileScene t={t} />
+        <MobileWindows client:media="(max-width: 899.98px)" {...windows} />
+      </div>
+    </div>
+    <MenuDrawer
+      client:media="(max-width: 899.98px)"
+      lang={t.lang}
+      page="home"
+      variant="box"
+      labels={{ open: t.ui.openMenu, close: t.ui.closeMenu, languages: t.ui.languages }}
+    />
+    <ContactPopup client:media="(max-width: 899.98px)" contact={t.windows.contact} closeLabel={t.ui.close} />
+  </div>
+</Base>

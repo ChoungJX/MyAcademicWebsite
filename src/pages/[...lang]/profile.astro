@@ -1,0 +1,30 @@
+---
+import Paper from '../../layouts/Paper.astro';
+import Publication from '../../components/profile/Publication';
+import {
+  AboutSection,
+  ContactSection,
+  EducationSection,
+  ExperienceSection,
+  NewsSection,
+  Section,
+} from '../../components/profile/sections';
+import { getContent, langPaths } from '../../data';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const t = getContent(Astro.params.lang);
+---
+
+<Paper t={t} page="profile">
+  <AboutSection t={t} />
+  <NewsSection t={t} />
+  <Section id="pubs">
+    {t.publications.map((p) => <Publication client:visible p={p} labels={{ copy: t.ui.copy, copied: t.ui.copied }} />)}
+  </Section>
+  <EducationSection t={t} />
+  <ExperienceSection t={t} />
+  <ContactSection t={t} />
+</Paper>
