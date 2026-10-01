@@ -13,8 +13,9 @@ interface Props {
 const { t } = Astro.props;
 
 // Shows that address under the notice; textContent keeps whatever is in it from being read as HTML.
-// Then shows GO BACK if a link in this tab led here. A typed address or a bookmark has no referrer,
-// and a link opened in a new tab leaves nothing to go back to (or only a blank page).
+// Then shows GO BACK when there is a page to go back to: one of this site's pages earlier in the tab
+// (navigation.canGoBack, in browsers with the Navigation API), or the page whose link led here in
+// this tab. An address typed into a new tab, a bookmark, or a link opened in a new tab has neither.
 const PAGE_SCRIPT = `(function () {
   var el = document.getElementById('nf-path');
   var path = location.pathname;
@@ -24,7 +25,8 @@ const PAGE_SCRIPT = `(function () {
   el.textContent = path;
   el.hidden = false;
 
-  if (document.referrer && history.length > 1) {
+  var siteBehind = window.navigation && window.navigation.canGoBack;
+  if (siteBehind || (document.referrer && history.length > 1)) {
     var back = document.getElementById('go-back');
     back.addEventListener('click', function () {
       history.back();
