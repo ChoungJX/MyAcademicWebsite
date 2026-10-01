@@ -42,7 +42,7 @@ export interface Content {
   lang: Lang;
   /** Value for <html lang>. */
   htmlLang: string;
-  meta: { homeTitle: string; profileTitle: string; newsTitle: string; description: string };
+  meta: { homeTitle: string; profileTitle: string; newsTitle: string; notFoundTitle: string; description: string };
   /** Name on the home page's name chip. */
   nameChip: string;
   /** Name in the local script, after the English one in the whoami window. */
@@ -76,4 +76,6 @@ export interface Content {
   education: { degrees: Degree[]; expectedNote: string };
   experience: Job[];
   contact: { message: string; eat: string };
+  /** The 404 page: its heading and the line under it. */
+  notFound: { heading: string; body: string };
 }

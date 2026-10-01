@@ -1,14 +1,14 @@
 import type { ReactNode } from 'react';
 import ContactLink from '../ContactLink';
 import Credit from '../Credit';
-import { BigCrescent, Crescent } from '../icons';
+import { BackArrow, BigCrescent, Crescent } from '../icons';
 import { CONTACT_LINKS, EMAIL, GITHUB_USER, ORCID_ID } from '../../data/shared';
 import { SECTIONS, pathFor } from '../../data';
 import type { SectionId } from '../../data';
 import type { Content, Lang, NewsItem } from '../../data/types';
 
-// Static sections of the profile and News pages ("Paper & Graphite"). The publications list is an
-// island (Publication.tsx) because of its BibTeX box, so profile.astro puts the page together.
+// Static sections of the profile, News and 404 pages ("Paper & Graphite"). The publications list is
+// an island (Publication.tsx) because of its BibTeX box, so profile.astro puts the page together.
 
 /** How many news items the profile page shows. The News page lists them all. */
 const PROFILE_NEWS = 3;
@@ -26,8 +26,8 @@ export function Section({ id, children }: { id: SectionId; children: ReactNode }
   );
 }
 
-/** The name and, beside it, the page's black label (PROFILE, NEWS). */
-export function ProfileHeader({ t, label }: { t: Content; label: string }) {
+/** The ways back to the home page: the moon in the phone's corner, the HOME tab on desktop. */
+export function HomeLinks({ t }: { t: Content }) {
   const home = pathFor(t.lang, 'home');
   return (
     <>
@@ -37,6 +37,15 @@ export function ProfileHeader({ t, label }: { t: Content; label: string }) {
       <a className="side-tab" href={home}>
         HOME
       </a>
+    </>
+  );
+}
+
+/** The name and, beside it, the page's black label (PROFILE, NEWS). */
+export function ProfileHeader({ t, label }: { t: Content; label: string }) {
+  return (
+    <>
+      <HomeLinks t={t} />
       <header className="profile-head">
         <h1 className="profile-name">Linfeng Zheng</h1>
         <span className="label">{label}</span>
@@ -67,15 +76,22 @@ export function AboutSection({ t }: { t: Content }) {
   );
 }
 
+/** The first line of an entry: its date (or code) in brackets and an optional violet tag. */
+function EntryHead({ stamp, tag }: { stamp: string; tag?: string }) {
+  return (
+    <div className="entry-head">
+      <span className="entry-stamp">[{stamp}]</span>
+      {tag && <span className="tag">{tag}</span>}
+    </div>
+  );
+}
+
 /** One news item. VIEW MORE on a NEW one leads to the publications. */
 function NewsEntry({ n, lang }: { n: NewsItem; lang: Lang }) {
   return (
-    <article className="news-item">
-      <div className="news-date-row">
-        <span className="news-date">[{n.date}]</span>
-        {n.isNew && <span className="tag-new">NEW</span>}
-      </div>
-      <p className="news-text">{n.text}</p>
+    <article className="entry">
+      <EntryHead stamp={n.date} tag={n.isNew ? 'NEW' : undefined} />
+      <p className="entry-title">{n.text}</p>
       {n.isNew && (
         <a className="btn-ink" href={pathFor(lang, 'profile', 'pubs')}>
           VIEW MORE
@@ -117,6 +133,21 @@ export function NewsArchive({ t }: { t: Content }) {
         </section>
       ))}
     </div>
+  );
+}
+
+/**
+ * The 404 page's notice, set like a news item. The address stays empty in the HTML: the page's
+ * script fills in the one that was asked for.
+ */
+export function NotFoundEntry({ t }: { t: Content }) {
+  return (
+    <article className="entry nf-entry">
+      <EntryHead stamp="404" tag="NOT FOUND" />
+      <h1 className="entry-title">{t.notFound.heading}</h1>
+      <p className="nf-body">{t.notFound.body}</p>
+      <p id="nf-path" className="nf-path" hidden />
+    </article>
   );
 }
 
@@ -182,13 +213,30 @@ export function ContactSection({ t }: { t: Content }) {
   );
 }
 
-export function ProfileFooter({ t }: { t: Content }) {
+/**
+ * BACK HOME and the credit. The 404 page also asks for GO BACK beside BACK HOME. It stays hidden in the
+ * HTML: the page's script shows it when there is a page to go back to.
+ */
+export function ProfileFooter({ t, goBack = false }: { t: Content; goBack?: boolean }) {
+  const home = (
+    <a className="btn-pixel" href={pathFor(t.lang, 'home')}>
+      <Crescent />
+      BACK HOME
+    </a>
+  );
   return (
     <footer className="profile-foot">
-      <a className="btn-pixel" href={pathFor(t.lang, 'home')}>
-        <Crescent />
-        BACK HOME
-      </a>
+      {goBack ? (
+        <div className="foot-buttons">
+          {home}
+          <button id="go-back" type="button" className="btn-pixel btn-pixel--outline" hidden>
+            <BackArrow />
+            GO BACK
+          </button>
+        </div>
+      ) : (
+        home
+      )}
       <Credit lang={t.lang} />
     </footer>
   );

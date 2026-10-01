@@ -10,6 +10,7 @@ const en: Content = {
     homeTitle: 'Linfeng Zheng',
     profileTitle: 'Profile · Linfeng Zheng',
     newsTitle: 'News · Linfeng Zheng',
+    notFoundTitle: 'Page not found · Linfeng Zheng',
     description:
       'Linfeng Zheng, PhD student at Institute of Science Tokyo (CARAS Lab), working on branch prediction and interpreters.',
   },
@@ -126,6 +127,7 @@ const en: Content = {
     },
   ],
   contact: { message: 'Feel free to contact me!', eat: 'What do we eat today?' },
+  notFound: { heading: 'Page not found', body: 'Nothing lives at this address.' },
 };
 
 export default en;

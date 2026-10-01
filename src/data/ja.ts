@@ -11,6 +11,7 @@ const ja: Content = {
     homeTitle: '鄭林峰',
     profileTitle: 'プロフィール · 鄭林峰',
     newsTitle: 'ニュース · 鄭林峰',
+    notFoundTitle: 'ページが見つかりません · 鄭林峰',
     description: '東京科学大学 博士課程の鄭林峰です。分岐予測とインタプリタの研究をしています。',
   },
   nameChip: '鄭林峰',
@@ -108,6 +109,7 @@ const ja: Content = {
     },
   ],
   contact: { message: 'お気軽にご連絡ください！', eat: '今日なに食べる？' },
+  notFound: { heading: 'ページが見つかりません', body: 'このアドレスには何もありません。' },
 };
 
 export default ja;

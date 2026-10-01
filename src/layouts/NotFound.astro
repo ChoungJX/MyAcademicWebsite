@@ -1,0 +1,50 @@
+---
+// The 404 page in one language (pages/404.astro, pages/[lang]/404.astro). The server answers an
+// address that has no page with the 404 page of its language (README, Deploy), so the address bar
+// still shows the address that was asked for.
+import Base from './Base.astro';
+import { HomeLinks, NotFoundEntry, ProfileFooter } from '../components/profile/sections';
+import type { Content } from '../data/types';
+
+interface Props {
+  t: Content;
+}
+
+const { t } = Astro.props;
+
+// Shows that address under the notice; textContent keeps whatever is in it from being read as HTML.
+// Then shows GO BACK if a link in this tab led here. A typed address or a bookmark has no referrer,
+// and a link opened in a new tab leaves nothing to go back to (or only a blank page).
+const PAGE_SCRIPT = `(function () {
+  var el = document.getElementById('nf-path');
+  var path = location.pathname;
+  try {
+    path = decodeURI(path);
+  } catch (e) {}
+  el.textContent = path;
+  el.hidden = false;
+
+  if (document.referrer && history.length > 1) {
+    var back = document.getElementById('go-back');
+    back.addEventListener('click', function () {
+      history.back();
+    });
+    back.hidden = false;
+  }
+})();`;
+---
+
+<Base t={t} page="404">
+  <div class="profile-page">
+    <HomeLinks t={t} />
+    <header class="profile-head nf-head">
+      <span class="label">404</span>
+    </header>
+    <main class="profile-main nf-main">
+      <p class="nf-big" aria-hidden="true">404</p>
+      <NotFoundEntry t={t} />
+      <ProfileFooter t={t} goBack />
+    </main>
+  </div>
+  <script is:inline set:html={PAGE_SCRIPT} />
+</Base>

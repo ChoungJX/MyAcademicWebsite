@@ -1,0 +1,12 @@
+---
+// The Chinese and Japanese 404 pages, at /zh/404/ and /ja/404/. English is ../404.astro.
+import NotFound from '../../layouts/NotFound.astro';
+import { getContent } from '../../data';
+import { LANGS } from '../../data/shared';
+
+export function getStaticPaths() {
+  return LANGS.filter((l) => l.lang !== 'en').map((l) => ({ params: { lang: l.lang } }));
+}
+---
+
+<NotFound t={getContent(Astro.params.lang)} />

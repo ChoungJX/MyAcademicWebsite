@@ -25,6 +25,15 @@ export function Crescent() {
   );
 }
 
+/** Left arrow on the 404 page's GO BACK button, in the button's text color. */
+export function BackArrow() {
+  return (
+    <svg width="12" height="10" viewBox="0 0 12 10" aria-hidden="true">
+      <path fill="currentColor" d="M4 0h2v2h-2zM2 2h2v2h-2zM0 4h12v2h-12zM2 6h2v2h-2zM4 8h2v2h-2z" />
+    </svg>
+  );
+}
+
 /** Violet sparkle in the News window. */
 export function Sparkle() {
   return (

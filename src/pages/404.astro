@@ -1,0 +1,7 @@
+---
+// English, at /404.html. Astro's dev server also shows this page for every address that has no page.
+import NotFound from '../layouts/NotFound.astro';
+import { getContent } from '../data';
+---
+
+<NotFound t={getContent(undefined)} />

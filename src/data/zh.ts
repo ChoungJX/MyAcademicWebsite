@@ -11,6 +11,7 @@ const zh: Content = {
     homeTitle: '郑林峰的主页',
     profileTitle: '个人资料 · 郑林峰',
     newsTitle: '新闻 · 郑林峰',
+    notFoundTitle: '页面不存在 · 郑林峰',
     description: '郑林峰，东京科学大学（原东京工业大学）博士生。',
   },
   nameChip: '郑林峰',
@@ -97,6 +98,7 @@ const zh: Content = {
     },
   ],
   contact: { message: '点击邮件按钮与我联系！', eat: '今天吃什么？' },
+  notFound: { heading: '页面不存在', body: '这个地址什么都没有。' },
 };
 
 export default zh;

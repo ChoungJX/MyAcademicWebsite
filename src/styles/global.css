@@ -1188,7 +1188,7 @@ body.paper :focus-visible {
   color: var(--violet);
 }
 
-.news-item {
+.entry {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1196,19 +1196,19 @@ body.paper :focus-visible {
   border-bottom: 1px solid var(--graphite);
 }
 
-.news-date-row {
+.entry-head {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.news-date {
+.entry-stamp {
   font-size: 15px;
   font-weight: 700;
   line-height: 1.5;
 }
 
-.tag-new {
+.tag {
   padding: 3px 6px;
   background: var(--violet);
   color: #ffffff;
@@ -1217,7 +1217,7 @@ body.paper :focus-visible {
   line-height: 1;
 }
 
-.news-text {
+.entry-title {
   margin: 0;
   font-size: 16px;
   font-weight: 700;
@@ -1244,7 +1244,7 @@ body.paper :focus-visible {
   color: var(--terminal);
 }
 
-.news-item .btn-ink {
+.entry .btn-ink {
   align-self: center;
   margin-top: 10px;
   padding: 0 16px;
@@ -1582,6 +1582,23 @@ body.paper :focus-visible {
   color: var(--terminal);
 }
 
+/* GO BACK on the 404 page: the outlined twin. The border and the arrow follow the text color. */
+.btn-pixel--outline {
+  background: transparent;
+  border: 2px solid;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.btn-pixel--outline:hover {
+  color: var(--violet);
+}
+
+/* Its display: inline-flex would show it even while the page keeps it hidden. */
+.btn-pixel--outline[hidden] {
+  display: none;
+}
+
 /* Under the profile's newest news, to the News page. */
 .all-news {
   align-self: flex-end;
@@ -1682,19 +1699,19 @@ body.paper :focus-visible {
     font-size: 17px;
   }
 
-  .news-item {
+  .entry {
     padding: 20px 0;
   }
 
-  .news-date {
+  .entry-stamp {
     font-size: 16px;
   }
 
-  .news-text {
+  .entry-title {
     font-size: 17px;
   }
 
-  .news-item .btn-ink {
+  .entry .btn-ink {
     height: auto;
     padding: 8px 14px;
   }
@@ -1798,6 +1815,97 @@ body.paper :focus-visible {
 
   .btn-pixel {
     padding: 0 20px;
+  }
+}
+
+/* ---------- 404 pages ---------- */
+/* The profile page's header and column (.profile-head, .profile-main) with only the 404 label.
+   There are no menus, so the column stays centered on desktop too. */
+.nf-head {
+  height: 132px;
+  padding-top: 24px;
+}
+
+.nf-main {
+  margin-top: 0;
+  gap: 24px;
+}
+
+.nf-big {
+  margin: 0;
+  align-self: center;
+  font-family: var(--font-hand);
+  font-size: 160px;
+  line-height: 0.8;
+  color: var(--ink);
+  transform: rotate(-4deg);
+}
+
+.nf-entry {
+  border-top: 1px solid var(--graphite);
+}
+
+.nf-body {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--subtle-paper);
+}
+
+.nf-path {
+  margin: 4px 0 0;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--muted-paper);
+  overflow-wrap: anywhere;
+}
+
+.nf-main .profile-foot {
+  padding-top: 8px;
+}
+
+/* BACK HOME and GO BACK side by side. On a phone too narrow for both, GO BACK wraps below. */
+.foot-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .nf-head,
+  .nf-main {
+    width: min(760px, calc(100% - 136px));
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nf-head {
+    align-items: flex-start;
+    height: 196px;
+    padding-top: 64px;
+  }
+
+  .nf-main {
+    gap: 28px;
+  }
+
+  .nf-big {
+    font-size: 220px;
+  }
+
+  .nf-body {
+    font-size: 16px;
+  }
+
+  .nf-main .profile-foot {
+    padding-top: 24px;
+  }
+
+  .foot-buttons {
+    gap: 16px;
   }
 }
 
