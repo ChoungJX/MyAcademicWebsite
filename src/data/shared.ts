@@ -49,16 +49,15 @@ export const CAL_PAPER: Omit<Publication, 'status'> = {
   title: 'Improving Indirect Branch Prediction in Interpreters via Hardware/Software Co-Design',
   authors: [{ name: 'Linfeng Zheng', me: true }, { name: 'Hiroshi Sasaki' }],
   venue: 'IEEE Computer Architecture Letters (CAL), 2026',
-  // IEEE Xplore's "Cite This" entry without its keywords. The paper is in Early Access, so volume and
-  // number are empty and the pages may change; copy the entry again once the paper is in an issue.
+  // IEEE Xplore's "Cite This" entry for the issue version (vol. 25, no. 2), without its keywords.
   bibtex: `@ARTICLE{11714309,
   author={Zheng, Linfeng and Sasaki, Hiroshi},
   journal={IEEE Computer Architecture Letters},
   title={Improving Indirect Branch Prediction in Interpreters via Hardware/Software Co-Design},
   year={2026},
-  volume={},
-  number={},
-  pages={1-4},
+  volume={25},
+  number={2},
+  pages={419-422},
   doi={10.1109/LCA.2026.3738406}}`,
   doi: '10.1109/LCA.2026.3738406',
 };
